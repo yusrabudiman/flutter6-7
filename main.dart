@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_navigation/components/pertemuan07_screen.dart';
+
+import 'package:flutter_application_1/pertemuan06/pertemuan06_provider.dart';
+import 'package:flutter_application_1/pertemuan06/pertemuan06_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_navigation/components/pertemuan07_provider.dart';
 
 void main() {
-  runApp(MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => Pertemuan07Provider())],
-      child: MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => Pertemuan06Provider()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,14 +15,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prov = Provider.of<Pertemuan06Provider>(context);
     return MaterialApp(
+      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      //gunakan "theme" ini untuk menerapkan enable dark sesuai topik materi minggu 06
-      //theme: prov.isActive == ? prov.dark : prov.light,
-      theme:
-          ThemeData(brightness: Brightness.light, primarySwatch: Colors.purple),
-
-      home: Pertemuan07Screen(),
+      theme: prov.enableDarkMode == true ? prov.dark : prov.light,
+      home: Pertemuan06Screen(),
     );
   }
 }
